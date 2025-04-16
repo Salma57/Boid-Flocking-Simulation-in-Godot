@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://c371wh28p436y"]
+
+[ext_resource type="PackedScene" uid="uid://2yj8tsu76if5" path="res://assets/scenes/Trail.tscn" id="2"]
+[ext_resource type="Texture2D" uid="uid://bkn036dkix53i" path="res://assets/scenes/pngegg (1).png" id="2_chrr0"]
+[ext_resource type="Script" path="res://assets/scripts/Boid.gd" id="3"]
+
+[sub_resource type="Gradient" id="Gradient_sg1fp"]
+resource_local_to_scene = true
+offsets = PackedFloat32Array(0, 0.761589, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.490066, 1, 1, 1, 1)
+
+[node name="Boid" type="Node2D"]
+script = ExtResource("3")
+baseColor = Color(0.870588, 0.415686, 0.964706, 1)
+specialColor = Color(0.372549, 0.121569, 0.815686, 1)
+trail = NodePath("Trail")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_chrr0")
+
+[node name="Trail" parent="." instance=ExtResource("2")]
+gradient = SubResource("Gradient_sg1fp")

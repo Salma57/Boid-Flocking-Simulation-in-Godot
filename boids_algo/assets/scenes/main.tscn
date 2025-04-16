@@ -1,0 +1,53 @@
+[gd_scene load_steps=10 format=3 uid="uid://bhfjqxfptwfxp"]
+
+[ext_resource type="Script" path="res://assets/scripts/Flock.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://c371wh28p436y" path="res://assets/scenes/Boid.tscn" id="2"]
+[ext_resource type="Script" path="res://assets/scripts/Predator.gd" id="4"]
+[ext_resource type="Texture2D" uid="uid://cxo226uxrnl7u" path="res://pngegg.png" id="4_h028f"]
+[ext_resource type="Script" path="res://assets/scripts/Cursor.gd" id="5"]
+[ext_resource type="Texture2D" uid="uid://ck5os1dgt7y2p" path="res://assets/sprites/cursor.png" id="6"]
+[ext_resource type="PackedScene" uid="uid://2yj8tsu76if5" path="res://assets/scenes/Trail.tscn" id="7"]
+[ext_resource type="Texture2D" uid="uid://cgoc71qd3ckii" path="res://assets/scenes/mer2.png" id="8_yi8ah"]
+
+[sub_resource type="Gradient" id="1"]
+offsets = PackedFloat32Array(0, 0.701219, 0.821192, 1)
+colors = PackedColorArray(0.729412, 0.117647, 0.117647, 0, 0.0588235, 0.12549, 0.623529, 0.447059, 0.729412, 0.117647, 0.117647, 0.521569, 0.729412, 0.117647, 0.117647, 1)
+
+[node name="Root" type="Node2D"]
+
+[node name="Flock" type="Node2D" parent="."]
+script = ExtResource("1")
+boidScene = ExtResource("2")
+numberOfBoids = 75
+predator = NodePath("../Predator")
+
+[node name="Predator" type="Node2D" parent="."]
+position = Vector2(960, 540)
+script = ExtResource("4")
+acceleration = 4000.0
+maxSpeed = 300.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Predator"]
+z_index = 2
+position = Vector2(0.999969, -78)
+rotation = 1.58001
+scale = Vector2(0.028, 0.0239282)
+texture = ExtResource("4_h028f")
+
+[node name="Trail" parent="Predator" instance=ExtResource("7")]
+width = 6.0
+gradient = SubResource("1")
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = false
+
+[node name="Mer2" type="Sprite2D" parent="."]
+position = Vector2(248, 536)
+texture = ExtResource("8_yi8ah")
+
+[node name="Cursor" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+scale = Vector2(0.015, 0.015)
+texture = ExtResource("6")
+script = ExtResource("5")
